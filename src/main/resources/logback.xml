@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    
+    <!-- ====================================================================== -->
+    <!-- ===== log4j appenders ================================================ -->
+    <!-- ====================================================================== -->
+
+    <!-- The threshold definition from min -> max -->
+    <!-- trace debug info warn error fatal -->
+
+    <!-- logback console appender -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+      <!-- encoders are assigned to the type ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+      <!-- layout class="ch.qos.logback.classic.PatternLayout">
+        <pattern>%-4relative [%thread] %-5level %class - %msg%n</pattern>
+      </layout-->
+      <encoder>
+          <!-- pattern>%d{HH:mm:ss} %5p [%thread] %-5level %logger{5} - %msg%n</pattern -->
+          <pattern>%d{HH:mm:ss} %5p | %t | %-5level %logger{32} - [%file:%line] - %msg%n</pattern>
+      </encoder>
+    </appender>
+
+    <!-- Basic file appender -->
+    <!-- appender name="file" class="ch.qos.logback.core.FileAppender">
+      <layout class="ch.qos.logback.classic.PatternLayout">
+        <pattern>%d{HH:mm:ss} %5p | %t | %-5level %logger{32} - [%file:%line] - %msg%n</pattern>
+      </layout>
+      <File>project.log</File>
+    </appender-->
+    
+    <!-- log4j logfile appender -->
+    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>hola-jersey.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>neurodb.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!-- keep 7 days' worth history -->
+            <MaxHistory>7</MaxHistory>
+        </rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%d{HH:mm:ss} %5p | %t | %-5level %logger{32} - [%file:%line] - %msg%n</pattern>
+		</layout>
+    </appender>
+    
+    <!-- ====================================================================== -->
+    <!-- ===== logback root element =========================================== -->
+    <root>
+      <level value ="DEBUG" />
+      <appender-ref ref="console" />
+      <!--appender-ref ref="file" /-->
+    </root>
+    <!-- ====================================================================== -->
+    
+    <logger name="ch.qos.logback">
+        <level value="FATAL"/>
+    </logger>
+
+    <logger name="org.springframework">
+        <level value="DEBUG"/>
+        <appender-ref ref="console" />
+    </logger>
+
+    <!-- ====================================================================== -->
+    <!-- ===== PROJECT RELATED LOGGERS ======================================== -->
+    <!-- ====================================================================== -->
+
+    <logger name="com.github">
+        <level value="DEBUG"/>
+    </logger>
+
+	<!--
+    <logger name="test">
+        <level value="INFO"/>
+        <appender-ref ref="console"/>
+    </logger>
+	-->
+</configuration>

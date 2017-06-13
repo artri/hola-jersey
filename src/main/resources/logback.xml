@@ -32,7 +32,7 @@
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>hola-jersey.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>neurodb.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>hola-jersey.%d{yyyy-MM-dd}.log</FileNamePattern>
             <!-- keep 7 days' worth history -->
             <MaxHistory>7</MaxHistory>
         </rollingPolicy>
